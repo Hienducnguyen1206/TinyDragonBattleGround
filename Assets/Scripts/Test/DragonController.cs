@@ -1,27 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(DragonCurrentStats))]
 public class DragonController : MonoBehaviour
-{   
+{
     [SerializeField] Animator _animator;
     [SerializeField] Rigidbody _rigidbody;
     [SerializeField] FixedJoystick _fixedJoystick;
-    [SerializeField] float _moveSpeed;
+    [SerializeField] DragonCurrentStats currentStats;
+
+
+    [SerializeField] bool isRunning = false;
+    [SerializeField] bool isFlying = false;
+
+    [SerializeField] DragonHealth dragonHealth;
+
 
     // Start is called before the first frame update
-     void Start()
+    void Start()
     {
-        
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _animator.SetTrigger("Jumping");
-        }
+        
+
+
+    }
+
+    private void OnEnable()
+    {
+        DragonHealth.ZeroStrength += RunButtonPressed;
+    }
+
+    private void OnDisable()
+    {
+        DragonHealth.ZeroStrength -= RunButtonPressed;
     }
 
     // Update is called once per frame
@@ -29,30 +46,69 @@ public class DragonController : MonoBehaviour
     {
         DragonControll();
     }
-  
 
-    
+
+
 
     void DragonControll()
-    {   
-
-        _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * _moveSpeed,0, _fixedJoystick.Vertical * _moveSpeed);
+    {
 
 
 
-
-        if (_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0)
+        if (isRunning)
         {
-            _animator.SetBool("Walking", true);
-            transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+            _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * currentStats.currentMovementSpeed * 3f, 0, _fixedJoystick.Vertical * currentStats.currentMovementSpeed*3f);
+            if (_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0)
+            {
+                _animator.SetBool("Running", true);
+                transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
 
+            }
+            else
+            {
+                _animator.SetBool("Running", false);
+            }
         }
-        else {
-            _animator.SetBool("Walking", false);
+        else
+        {
+            _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * currentStats.currentMovementSpeed, 0, _fixedJoystick.Vertical * currentStats.currentMovementSpeed);
+            if (_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0)
+            {
+                _animator.SetBool("Running", false);
+                _animator.SetBool("Walking", true);
+                transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+
+            }
+            else
+            {
+                _animator.SetBool("Walking", false);
+            }
         }
+        
 
 
         
 
+
+
+
+
     }
+
+    public void RunButtonPressed()
+    {
+      isRunning  =  !isRunning;
+
+        if (isRunning)
+        {
+            dragonHealth.StartDecreaseStrength();
+        }
+        else
+        {
+            dragonHealth.StartIncreaseStrength();
+        }
+        
+    }
+
+
 }

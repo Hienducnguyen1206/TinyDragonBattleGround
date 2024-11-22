@@ -4,10 +4,28 @@ using UnityEngine;
 
 public class DragonCurrentStats : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    [SerializeField] DragonStats dragonStats;
+
+    [Header("Attributes")]
+    public float currentmaxHealth;
+    public float currentmaxStrength;
+
+    [Header("Attributes")]
+    public float currentAttackPower;
+    public float currentMovementSpeed;
+
+    [Header("Abilities")]
+    public float currentCriticalChance;
+    public float currentCriticalDamageMultiplier;
     void Start()
-    {
-        
+    {    
+         currentmaxHealth = dragonStats.maxHealth;
+         currentmaxStrength = dragonStats.maxStrength;
+         currentAttackPower = dragonStats.attackPower;
+         currentMovementSpeed = dragonStats.movementSpeed;
+         currentCriticalChance = dragonStats.criticalChance;
+         currentCriticalDamageMultiplier = dragonStats.criticalDamageMultiplier;
     }
 
     // Update is called once per frame
