@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody), typeof(DragonCurrentStats))]
 public class DragonController : MonoBehaviour
@@ -14,6 +15,8 @@ public class DragonController : MonoBehaviour
 
     [SerializeField] bool isRunning = false;
     [SerializeField] bool isFlying = false;
+    [SerializeField] bool isGround = true;
+    [SerializeField] bool isMaxHeight = false;
 
     [SerializeField] DragonHealth dragonHealth;
 
@@ -31,14 +34,18 @@ public class DragonController : MonoBehaviour
 
     }
 
+    
+
     private void OnEnable()
     {
-        DragonHealth.ZeroStrength += RunButtonPressed;
+        DragonHealth.ZeroStrength += ResetDragonMoveState;
+       
     }
 
     private void OnDisable()
     {
-        DragonHealth.ZeroStrength -= RunButtonPressed;
+        DragonHealth.ZeroStrength -= ResetDragonMoveState;
+       
     }
 
     // Update is called once per frame
@@ -61,22 +68,42 @@ public class DragonController : MonoBehaviour
             if (_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0)
             {
                 _animator.SetBool("Running", true);
-                transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+                Quaternion targetRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
 
             }
             else
             {
                 _animator.SetBool("Running", false);
             }
+        }else if (isFlying)
+        {   
+            
+            _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * currentStats.currentMovementSpeed * 4f, 0, _fixedJoystick.Vertical * currentStats.currentMovementSpeed * 4f);
+            
+            if (_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0)
+            {
+                _animator.SetBool("Flying", true);
+                Quaternion targetRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
+
+            }
+            
         }
-        else
+        else 
         {
             _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * currentStats.currentMovementSpeed, 0, _fixedJoystick.Vertical * currentStats.currentMovementSpeed);
             if (_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0)
             {
                 _animator.SetBool("Running", false);
+                _animator.SetBool("Flying",false);
                 _animator.SetBool("Walking", true);
-                transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+                Quaternion targetRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
+
 
             }
             else
@@ -96,8 +123,10 @@ public class DragonController : MonoBehaviour
     }
 
     public void RunButtonPressed()
-    {
-      isRunning  =  !isRunning;
+    {   
+        isFlying = false;
+        isRunning  =  !isRunning;
+        
 
         if (isRunning)
         {
@@ -108,7 +137,32 @@ public class DragonController : MonoBehaviour
             dragonHealth.StartIncreaseStrength();
         }
         
+    } 
+
+    public void FlyButtonPressed() 
+    {
+        
+        isFlying = !isFlying;
+        isRunning = false;
+       
+        if (isFlying)
+        {
+            dragonHealth.StartDecreaseStrength();
+           
+        }
+        else
+        {
+            dragonHealth.StartIncreaseStrength();
+        }
+
     }
 
+
+    public void ResetDragonMoveState()
+    {
+        isFlying = false;
+        isRunning = false;
+        dragonHealth.StartIncreaseStrength();
+    }
 
 }

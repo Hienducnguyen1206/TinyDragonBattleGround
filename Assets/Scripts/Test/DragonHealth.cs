@@ -75,7 +75,7 @@ public class DragonHealth : MonoBehaviour
     {
         while (currentStrength > 0)
         {
-            currentStrength -= 0.2f;
+            currentStrength -= 0.15f;
             strengthSlider.value = currentStrength;
             yield return new WaitForSeconds(0.0125f);
         }
@@ -89,7 +89,7 @@ public class DragonHealth : MonoBehaviour
     {
         while (currentStrength < maxStrength)
         {
-            currentStrength += 0.2f;
+            currentStrength += 0.1f;
             strengthSlider.value = currentStrength;
             yield return new WaitForSeconds(0.0125f);
         }
