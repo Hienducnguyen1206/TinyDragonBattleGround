@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
+<<<<<<< Updated upstream
     AppIdRealtime: 
+=======
+    AppIdRealtime: 5c2798bb-5ef5-42c0-9b02-89d71559a56a
+>>>>>>> Stashed changes
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
@@ -33,7 +37,16 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
+<<<<<<< Updated upstream
   RpcList: []
+=======
+  RpcList:
+  - ClickRpc
+  - DestroyRpc
+  - DestroySpaceship
+  - Fire
+  - RespawnSpaceship
+>>>>>>> Stashed changes
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

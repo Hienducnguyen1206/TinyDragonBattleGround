@@ -19,7 +19,10 @@ public class DragonCurrentStats : MonoBehaviour
     public float currentCriticalChance;
     public float currentCriticalDamageMultiplier;
     void Start()
-    {    
+    {
+
+        
+
          currentmaxHealth = dragonStats.maxHealth;
          currentmaxStrength = dragonStats.maxStrength;
          currentAttackPower = dragonStats.attackPower;

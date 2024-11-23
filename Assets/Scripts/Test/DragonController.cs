@@ -26,7 +26,7 @@ public class DragonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _fixedJoystick = UIManager.Instance.joystick;
     }
 
     void Update()
@@ -70,9 +70,12 @@ public class DragonController : MonoBehaviour
             if (_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0)
             {
                 _animator.SetBool("Running", true);
-                Quaternion targetRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
+                if (_rigidbody.velocity.magnitude > 0)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
+                }
 
             }
             else
@@ -87,9 +90,13 @@ public class DragonController : MonoBehaviour
             if (_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0)
             {
                 _animator.SetBool("Flying", true);
-                Quaternion targetRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
+                if (_rigidbody.velocity.magnitude > 0)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
+
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
+                }
 
             }
             
@@ -102,10 +109,13 @@ public class DragonController : MonoBehaviour
                 _animator.SetBool("Running", false);
                 _animator.SetBool("Flying",false);
                 _animator.SetBool("Walking", true);
-                Quaternion targetRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
+                if (_rigidbody.velocity.magnitude > 0)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
 
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
+                }
 
             }
             else

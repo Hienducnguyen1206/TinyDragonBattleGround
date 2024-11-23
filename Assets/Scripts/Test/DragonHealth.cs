@@ -21,7 +21,11 @@ public class DragonHealth : MonoBehaviour
     public static Action ZeroStrength;
 
     void Start()
-    {
+    {   
+        healthSlider = UIManager.Instance.healthSlider;
+        strengthSlider = UIManager.Instance.strengthSlider;
+
+
         healthSlider.maxValue = currentStats.currentmaxHealth;
         healthSlider.value = currentStats.currentmaxHealth;
 
@@ -37,6 +41,11 @@ public class DragonHealth : MonoBehaviour
     void Update()
     {
        CheckStrength();
+    }
+
+    public void InitUIReferences()
+    {
+
     }
 
     public void StartDecreaseStrength()
