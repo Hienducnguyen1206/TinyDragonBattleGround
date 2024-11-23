@@ -194,7 +194,7 @@ public class DragonController : MonoBehaviour
 
     IEnumerator FlyUp()
     {
-        while(transform.position.y  < 4.5f)
+        while(transform.position.y  < 5f)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + 1f * Time.deltaTime, transform.position.z);
             yield return null;
