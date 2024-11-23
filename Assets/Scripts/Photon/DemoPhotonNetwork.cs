@@ -20,7 +20,14 @@ public class DemoPhotonNetwork : MonoBehaviourPunCallbacks
     }
 
 
-    public override 
+    public override void OnConnectedToMaster()
+    {
+        base.OnConnectedToMaster();
+        PhotonNetwork.JoinLobby();
+        StatusText.text = "Loading...";
+    }
+
+
 
 
 }
