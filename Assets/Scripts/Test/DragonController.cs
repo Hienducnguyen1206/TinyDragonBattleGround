@@ -15,8 +15,11 @@ public class DragonController : MonoBehaviour
 
     [SerializeField] bool isRunning = false;
     [SerializeField] bool isFlying = false;
-    [SerializeField] bool isGround = true;
+    [SerializeField] bool isOnGround = true;
     [SerializeField] bool isMaxHeight = false;
+
+    private Coroutine flyUpCoroutine;
+    private Coroutine flyDownCoroutine;
 
     [SerializeField] DragonHealth dragonHealth;
 
@@ -80,7 +83,7 @@ public class DragonController : MonoBehaviour
         }else if (isFlying)
         {   
             
-            _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * currentStats.currentMovementSpeed * 4f, 0, _fixedJoystick.Vertical * currentStats.currentMovementSpeed * 4f);
+            _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * currentStats.currentMovementSpeed * 3f, 0, _fixedJoystick.Vertical * currentStats.currentMovementSpeed * 3f);
             
             if (_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0)
             {
@@ -144,15 +147,23 @@ public class DragonController : MonoBehaviour
         
         isFlying = !isFlying;
         isRunning = false;
-       
-        if (isFlying)
+
+        if (isFlying )
         {
             dragonHealth.StartDecreaseStrength();
-           
+            flyUpCoroutine = StartCoroutine(FlyUp());
         }
-        else
+        else 
         {
+            _animator.SetBool("Flying", false);
+            if (flyUpCoroutine != null)
+                {
+                    StopCoroutine(flyUpCoroutine);
+                   
+                }
+            flyDownCoroutine = StartCoroutine(FlyDown());
             dragonHealth.StartIncreaseStrength();
+            
         }
 
     }
@@ -160,9 +171,44 @@ public class DragonController : MonoBehaviour
 
     public void ResetDragonMoveState()
     {
-        isFlying = false;
+        if (isFlying)
+        {   
+            StartCoroutine(FlyDown());
+            isFlying = false;
+            _animator.SetBool("Flying",false);
+        }
+
         isRunning = false;
         dragonHealth.StartIncreaseStrength();
+       
     }
 
+    IEnumerator FlyUp()
+    {
+        while(transform.position.y  < 4.5f)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y + 1f * Time.deltaTime, transform.position.z);
+            yield return null;
+        }
+      
+        flyUpCoroutine = null;
+    }
+
+    IEnumerator FlyDown()
+    {
+        while (transform.position.y > 0f)
+        {
+            if (transform.position.y < 0.02f)
+            {
+                break;
+            }
+
+            transform.position = new Vector3(transform.position.x, transform.position.y -  1.5f * Time.deltaTime, transform.position.z);
+            yield return null;
+        }
+        flyDownCoroutine = null;
+
+        
+
+    }
 }
