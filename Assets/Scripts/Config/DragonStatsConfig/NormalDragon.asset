@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: NewDragonStats
-  m_EditorClassIdentifier: Assembly-CSharp::DragonStats
-  dragonName: 123
-  maxHealth: 100
-  maxStrength: 100
-  attackPower: 10
-  movementSpeed: 1.5
-  criticalChance: 10
-  criticalDamageMultiplier: 2
+  m_Script: {fileID: 11500000, guid: d57693780b2e388448a71d0675a2e420, type: 3}
+  m_Name: NormalDragon
+  m_EditorClassIdentifier: 
+  dragonName: 
+  maxHealth: 0
+  maxStrength: 0
+  attackPower: 0
+  movementSpeed: 0
+  criticalChance: 0
+  criticalDamageMultiplier: 0

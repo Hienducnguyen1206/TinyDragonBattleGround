@@ -26,7 +26,7 @@ public class DragonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _fixedJoystick = UIManager.Instance.joystick;
+        
     }
 
     void Update()

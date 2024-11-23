@@ -42,10 +42,7 @@ public class DragonHealth : MonoBehaviour
        CheckStrength();
     }
 
-    public void InitUIReferences()
-    {
-
-    }
+  
 
     public void StartDecreaseStrength()
     {

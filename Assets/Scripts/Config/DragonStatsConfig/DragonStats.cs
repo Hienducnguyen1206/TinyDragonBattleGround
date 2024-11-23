@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewDragonStats", menuName = "Dragon/Dragon Stats")]
-public class DragonStats : ScriptableObject
+public class DragonStats: ScriptableObject
 {
     [Header("Basic Stats")]
     public string dragonName;
@@ -13,6 +13,6 @@ public class DragonStats : ScriptableObject
     public float movementSpeed;
 
     [Header("Abilities")]
-    public float criticalChance; 
-    public float criticalDamageMultiplier; 
+    public float criticalChance;
+    public float criticalDamageMultiplier;
 }

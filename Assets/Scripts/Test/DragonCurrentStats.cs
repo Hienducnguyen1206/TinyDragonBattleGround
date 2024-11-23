@@ -18,7 +18,7 @@ public class DragonCurrentStats : MonoBehaviour
     [Header("Abilities")]
     public float currentCriticalChance;
     public float currentCriticalDamageMultiplier;
-    void Start()
+    void Awake()
     {
 
         
