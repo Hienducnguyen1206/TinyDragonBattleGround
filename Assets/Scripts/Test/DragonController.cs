@@ -15,8 +15,7 @@ public class DragonController : MonoBehaviour
 
     [SerializeField] bool isRunning = false;
     [SerializeField] bool isFlying = false;
-    [SerializeField] bool isOnGround = true;
-    [SerializeField] bool isMaxHeight = false;
+
 
     private Coroutine flyUpCoroutine;
     private Coroutine flyDownCoroutine;
