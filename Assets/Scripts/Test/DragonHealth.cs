@@ -22,8 +22,7 @@ public class DragonHealth : MonoBehaviour
 
     void Start()
     {   
-        healthSlider = UIManager.Instance.healthSlider;
-        strengthSlider = UIManager.Instance.strengthSlider;
+       
 
 
         healthSlider.maxValue = currentStats.currentmaxHealth;
