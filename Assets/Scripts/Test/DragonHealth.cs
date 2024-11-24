@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,31 +11,32 @@ public class DragonHealth : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] Slider strengthSlider;
     [SerializeField] DragonCurrentStats currentStats;
-    [SerializeField] float maxHealth;
-    [SerializeField] float currentHealth;
-    [SerializeField] float maxStrength;
-    [SerializeField] float currentStrength;
+    public float maxHealth;
+    public float currentHealth;
+    public float maxStrength;
+    public float currentStrength;
+
+    [SerializeField] PhotonView photonView;
 
     private Coroutine decreaseStrengthCoroutine;  
     private Coroutine regenStrengthCoroutine;
 
     public static Action ZeroStrength;
 
-    void Start()
-    {   
+    void Awake()
+    {
        
 
 
-        healthSlider.maxValue = currentStats.currentmaxHealth;
-        healthSlider.value = currentStats.currentmaxHealth;
 
-        strengthSlider.maxValue = currentStats.currentmaxStrength;
-        strengthSlider.value = currentStats.currentmaxStrength;
+
+   
 
         maxHealth = currentStats.currentmaxHealth;
         currentHealth = currentStats.currentmaxHealth;
         maxStrength = currentStats.currentmaxStrength;
         currentStrength = currentStats.currentmaxStrength;
+        
     }
 
     void Update()
@@ -81,7 +83,7 @@ public class DragonHealth : MonoBehaviour
         while (currentStrength > 0)
         {
             currentStrength -= 0.15f;
-            strengthSlider.value = currentStrength;
+          //  strengthSlider.value = currentStrength;
             yield return new WaitForSeconds(0.0125f);
         }
 
@@ -95,7 +97,7 @@ public class DragonHealth : MonoBehaviour
         while (currentStrength < maxStrength)
         {
             currentStrength += 0.1f;
-            strengthSlider.value = currentStrength;
+          //  strengthSlider.value = currentStrength;
             yield return new WaitForSeconds(0.0125f);
         }
 

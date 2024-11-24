@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using Unity.VisualScripting;
+using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody), typeof(DragonCurrentStats))]
 public class DragonController : MonoBehaviour
 {
     [SerializeField] Animator _animator;
     [SerializeField] Rigidbody _rigidbody;
-    [SerializeField] FixedJoystick _fixedJoystick;
+    public FixedJoystick _fixedJoystick;
     [SerializeField] DragonCurrentStats currentStats;
 
 
@@ -22,11 +23,12 @@ public class DragonController : MonoBehaviour
 
     [SerializeField] DragonHealth dragonHealth;
 
+    [SerializeField] PhotonView photonView;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     void Update()
@@ -53,9 +55,17 @@ public class DragonController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        DragonControll();
+        if (photonView.IsMine)
+        {
+            DragonControll();
+        }
+       
     }
 
+    public void SetJoystick(FixedJoystick joystick)
+    {
+        _fixedJoystick = joystick;
+    }
 
 
 
@@ -122,6 +132,7 @@ public class DragonController : MonoBehaviour
             {
                 _animator.SetBool("Walking", false);
             }
+           
         }
         
 
