@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +15,15 @@ using UnityEngine.UI;
         [SerializeField]
         private Slider playerHealthSlider;
         [SerializeField]
+        private TextMeshProUGUI playerHealthText;
+        [SerializeField]
         private Slider playerStrengSlider;
         [SerializeField]
         private Slider playerExpSlider;
+        [SerializeField] 
+        private TextMeshProUGUI playerExpText;
+        [SerializeField] 
+        private TextMeshProUGUI playerLevelText;
         [SerializeField]
         private FixedJoystick fixedJoystick;
         [SerializeField]
@@ -73,6 +80,7 @@ using UnityEngine.UI;
         if (playerHealthSlider != null)
         {
             playerHealthSlider.value = dragonHealth.currentHealth;
+            playerHealthText.text = dragonHealth.currentHealth.ToString() + '/' + dragonHealth.maxHealth.ToString();
         }
         if (playerStrengSlider != null)
         {

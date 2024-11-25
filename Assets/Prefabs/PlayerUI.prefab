@@ -1677,10 +1677,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae5c2ac1c2d8644abd3322c4194578f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragonController: {fileID: 0}
+  dragonHealth: {fileID: 0}
   playerNameText: {fileID: 0}
   playerHealthSlider: {fileID: 8142836318749270067}
+  playerHealthText: {fileID: 4037049801440245869}
   playerStrengSlider: {fileID: 6508277051327540913}
   playerExpSlider: {fileID: 7971558678809057967}
+  playerExpText: {fileID: 1825656810778142607}
+  playerLevelText: {fileID: 6165152289698330666}
   fixedJoystick: {fileID: 1908977231935332470}
   FireButton: {fileID: 1624843136016301561}
   RunButton: {fileID: 5832536173553633108}

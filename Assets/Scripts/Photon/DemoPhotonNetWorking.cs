@@ -46,7 +46,7 @@ public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
     {
         base.OnCreatedRoom();
         Debug.Log("Create Room Success");
-        PhotonNetwork.LoadLevel("PlayScene");
+     //   PhotonNetwork.LoadLevel("PlayScene");
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
