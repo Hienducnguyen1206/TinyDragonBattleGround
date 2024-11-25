@@ -12,6 +12,7 @@ public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
     [SerializeField] Button JoinRoomBtn;
     [SerializeField] TMP_InputField RoomName;
     [SerializeField] TextMeshProUGUI Status;
+    [SerializeField] Image connectIcon;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,13 +26,14 @@ public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         PhotonNetwork.JoinLobby();
         Status.text = "Loading ...";
-
+        connectIcon.color = Color.yellow;
     }
 
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
         Status.text = "Connected";
+        connectIcon.color = Color.green;
     }
 
     public void CreateRoom()
