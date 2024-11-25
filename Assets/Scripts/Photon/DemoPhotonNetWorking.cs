@@ -9,7 +9,6 @@ using Photon.Realtime;
 public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
 {
     [SerializeField] Button CreateRoomBtn;
-    [SerializeField] Button JoinRoomBtn;
     [SerializeField] TMP_InputField RoomName;
     [SerializeField] TextMeshProUGUI Status;
     [SerializeField] Image connectIcon;
@@ -18,7 +17,6 @@ public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.ConnectUsingSettings();
         CreateRoomBtn.onClick.AddListener(CreateRoom);
-        JoinRoomBtn.onClick.AddListener(JoinRoom);
     }
 
     public override void OnConnectedToMaster()
@@ -27,6 +25,7 @@ public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         Status.text = "Loading ...";
         connectIcon.color = Color.yellow;
+        Status.color = Color.yellow;
     }
 
     public override void OnJoinedLobby()
@@ -34,6 +33,7 @@ public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
         base.OnJoinedLobby();
         Status.text = "Connected";
         connectIcon.color = Color.green;
+        Status.color = Color.green; 
     }
 
     public void CreateRoom()
