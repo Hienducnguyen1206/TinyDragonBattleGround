@@ -15,8 +15,8 @@ public class DemoSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-            GameObject player = PhotonNetwork.Instantiate("DragonSD_13", Vector3.zero, Quaternion.identity);
+           
+            GameObject player = PhotonNetwork.Instantiate("DragonSD_13", new Vector3(0,1,2), Quaternion.identity);
             Debug.Log("spawn player");
             GameObject _uiGo = Instantiate(PlayerUIPrefab);
            

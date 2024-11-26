@@ -52,7 +52,7 @@ public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
     {
         base.OnCreatedRoom();
         Debug.Log("Create Room Success");
-     //   PhotonNetwork.LoadLevel("PlayScene");
+     
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -69,7 +69,7 @@ public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        PhotonNetwork.LoadLevel("PlayScene");
+        PhotonNetwork.LoadLevel("GameScene");
         Debug.Log("Join Room Success");
     }
 
