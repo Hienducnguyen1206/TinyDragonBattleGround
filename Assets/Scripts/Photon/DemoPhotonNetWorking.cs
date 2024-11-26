@@ -37,7 +37,11 @@ public class DemoPhotonNetWorking : MonoBehaviourPunCallbacks
     }
 
     public void CreateRoom()
-    {   
+    {
+        if (RoomName.text == "")
+        {
+            return;
+        }
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 20;
         PhotonNetwork.CreateRoom(RoomName.text, roomOptions);
