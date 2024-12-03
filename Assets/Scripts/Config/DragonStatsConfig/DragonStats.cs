@@ -6,7 +6,9 @@ public class DragonStats: ScriptableObject
     [Header("Basic Stats")]
     public string dragonName;
     public float maxHealth;
-    public float maxStrength;
+    public float maxStamina;
+    public float healthRegenPerSecond;
+    public float staminaRegenPerSecond;
 
     [Header("Attributes")]
     public float attackPower;

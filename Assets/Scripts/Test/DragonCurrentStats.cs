@@ -9,11 +9,14 @@ public class DragonCurrentStats : MonoBehaviour
 
     [Header("Attributes")]
     public float currentmaxHealth;
-    public float currentmaxStrength;
+    public float currentmaxStamina;
+    public float currentHealthRegenPerSecond;
+    public float currentStaminaRegenPerSecond;
 
     [Header("Attributes")]
     public float currentAttackPower;
     public float currentMovementSpeed;
+
 
     [Header("Abilities")]
     public float currentCriticalChance;
@@ -21,10 +24,10 @@ public class DragonCurrentStats : MonoBehaviour
     void Awake()
     {
 
-        
-
          currentmaxHealth = dragonStats.maxHealth;
-         currentmaxStrength = dragonStats.maxStrength;
+         currentmaxStamina = dragonStats.maxStamina;
+         currentHealthRegenPerSecond = dragonStats.healthRegenPerSecond;
+         currentStaminaRegenPerSecond = dragonStats.staminaRegenPerSecond;
          currentAttackPower = dragonStats.attackPower;
          currentMovementSpeed = dragonStats.movementSpeed;
          currentCriticalChance = dragonStats.criticalChance;

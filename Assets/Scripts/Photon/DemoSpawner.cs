@@ -9,6 +9,8 @@ public class DemoSpawner : MonoBehaviour
     [SerializeField]
     private GameObject PlayerUIPrefab;
 
+ 
+
     [SerializeField]
     private CinemachineVirtualCamera virtualCamera;
 
@@ -19,8 +21,9 @@ public class DemoSpawner : MonoBehaviour
             GameObject player = PhotonNetwork.Instantiate("DragonSD_13", new Vector3(0,1,2), Quaternion.identity);
             Debug.Log("spawn player");
             GameObject _uiGo = Instantiate(PlayerUIPrefab);
-           
-           _uiGo.SendMessage("SetDragonHealth", player.GetComponent<DragonHealth>(), SendMessageOptions.RequireReceiver);
+        
+            MinimapCameraFollow.Instance.SendMessage("SetPlayerTransform", player.transform, SendMessageOptions.RequireReceiver);
+          
            _uiGo.SendMessage("SetDragonController", player.GetComponent<DragonController>(), SendMessageOptions.RequireReceiver);
             CinemachineVirtualCamera camera = Instantiate(virtualCamera);
             camera.Follow = player.transform;

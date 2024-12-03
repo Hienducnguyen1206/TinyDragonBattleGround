@@ -1,114 +1,124 @@
+﻿using DG.Tweening;
 using Photon.Pun;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DragonHealth : MonoBehaviour
 {
-    [SerializeField] Slider healthSlider;
-    [SerializeField] Slider strengthSlider;
+
     [SerializeField] DragonCurrentStats currentStats;
-    public float maxHealth;
-    public float currentHealth;
-    public float maxStrength;
-    public float currentStrength;
+    [SerializeField] Image healthBar;
+    [SerializeField] Image staminaBar;
 
-    [SerializeField] PhotonView photonView;
+  
 
-    private Coroutine decreaseStrengthCoroutine;  
-    private Coroutine regenStrengthCoroutine;
+
+
+
 
     public static Action ZeroStrength;
 
-    void Awake()
-    {
+
+    [SerializeField] private float maxHealth;  
+    [SerializeField] private float maxStamina;
+    [SerializeField] private float decreaseRate; 
+    [SerializeField] private float increaseRate;
+    [SerializeField] private float healthRegenPerSecond;
+
+    private float stamina;
+    private float health;
+
+
+    [SerializeField] private bool isDecreasing = false;
+
+    private Tween staminaTween;
+    private Tween healthTween;
+
+    void Start()
+    {   
        
-
-
-
-
-   
-
-        maxHealth = currentStats.currentmaxHealth;
-        currentHealth = currentStats.currentmaxHealth;
-        maxStrength = currentStats.currentmaxStrength;
-        currentStrength = currentStats.currentmaxStrength;
-        
+        health = currentStats.currentmaxHealth;
+        stamina = currentStats.currentmaxStamina;
+        decreaseRate = 10f;
+        increaseRate = currentStats.currentStaminaRegenPerSecond;
+        healthBar.fillAmount = 1f;
+        staminaBar.fillAmount = 1f;
     }
 
     void Update()
     {
-       CheckStrength();
-    }
-
-  
-
-    public void StartDecreaseStrength()
-    {
+        staminaBar.fillAmount = stamina / maxStamina;
         
-        if (regenStrengthCoroutine != null)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            StopCoroutine(regenStrengthCoroutine);
-            regenStrengthCoroutine = null;  
-        }
-
-        
-        if (decreaseStrengthCoroutine == null)
-        {
-            decreaseStrengthCoroutine = StartCoroutine(DecreaseStrength());
+            ToggleStaminaChange();
         }
     }
 
-    public void StartIncreaseStrength()
+    private void ToggleStaminaChange()
     {
-      
-        if (decreaseStrengthCoroutine != null)
-        {
-            StopCoroutine(decreaseStrengthCoroutine);
-            decreaseStrengthCoroutine = null; 
-        }
 
-        
-        if (regenStrengthCoroutine == null)
+        staminaTween?.Kill();
+
+        if (isDecreasing)
         {
-            regenStrengthCoroutine = StartCoroutine(StrengthRegen());
+
+            isDecreasing = false;
+            IncreaseStamina();
+        }
+        else
+        {
+
+            isDecreasing = true;
+            DecreaseStamina();
         }
     }
 
-    IEnumerator DecreaseStrength()
+    private void DecreaseStamina()
     {
-        while (currentStrength > 0)
-        {
-            currentStrength -= 0.15f;
-          //  strengthSlider.value = currentStrength;
-            yield return new WaitForSeconds(0.0125f);
-        }
 
+        staminaTween = DOTween.To(() => stamina, x => stamina = x, 0, stamina / decreaseRate)
+            .SetEase(Ease.Linear)
+            .OnUpdate(() =>
+            {
+                Debug.Log("Stamina Decreasing: " + stamina);
+            })
+            .OnComplete(() =>
+            {
 
-
-        decreaseStrengthCoroutine = null; 
+                Debug.Log("Stamina depleted. Switching to increase.");
+                isDecreasing = false;
+                IncreaseStamina();
+            });
     }
-
-    IEnumerator StrengthRegen()
+    private void IncreaseStamina()
     {
-        while (currentStrength < maxStrength)
-        {
-            currentStrength += 0.1f;
-          //  strengthSlider.value = currentStrength;
-            yield return new WaitForSeconds(0.0125f);
-        }
 
-        regenStrengthCoroutine = null; 
+        staminaTween = DOTween.To(() => stamina, x => stamina = x, currentStats.currentmaxStamina, (currentStats.currentmaxStamina - stamina) / increaseRate)
+            .SetEase(Ease.Linear)
+            .OnUpdate(() =>
+            {
+                Debug.Log("Stamina Increasing: " + stamina);
+            })
+            .OnComplete(() =>
+            {
+                Debug.Log("Stamina fully restored.");
+            });
     }
-
-    public void CheckStrength()
+    private void RegenHealthPoint()
     {
-        if (currentStrength <= 0)
-        {
-            ZeroStrength.Invoke();
-        }
+        healthTween = DOTween.To(() => health, x => health = x, currentStats.currentmaxHealth, (currentStats.currentmaxHealth - health) / healthRegenPerSecond)
+            .SetEase(Ease.Linear)
+            .OnUpdate(() =>
+            {
+                Debug.Log($"Health point: {health:0.00}");
+            }).OnComplete(() =>
+            {
+                Debug.Log("Health is full");
+            });
+            
     }
+
 }

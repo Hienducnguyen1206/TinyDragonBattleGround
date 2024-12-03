@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragonName: NormalDragon
   maxHealth: 100
-  maxStrength: 100
+  maxStamina: 100
+  healthRegenPerSecond: 1
+  staminaRegenPerSecond: 10
   attackPower: 10
-  movementSpeed: 1.5
+  movementSpeed: 1.75
   criticalChance: 10
   criticalDamageMultiplier: 2
