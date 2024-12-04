@@ -54,7 +54,7 @@ using UnityEngine.UI;
         dragonController.SetJoystick(fixedJoystick);
        
 
-       // RunButton.onClick.AddListener(dragonController.RunButtonPressed);
+         RunButton.onClick.AddListener(dragonController.RunButtonPressed);
          FlyButton.onClick.AddListener(dragonController.FlyButtonPressed);
     }
 

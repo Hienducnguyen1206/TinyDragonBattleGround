@@ -5,17 +5,19 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Missile
+  - Animal
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Terrain
   - Water
   - UI
-  - 
+  - Tree
   - post processing
-  - 
-  - 
+  - Player
+  - Effect
   - 
   - 
   - 
@@ -41,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Terrain
+    uniqueID: 3699333
+    locked: 0
+  - name: Tree
+    uniqueID: 754859181
+    locked: 0
+  - name: Player
+    uniqueID: 3494463957
+    locked: 0
+  - name: Effect
+    uniqueID: 4277292697
     locked: 0

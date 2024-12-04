@@ -18,6 +18,6 @@ MonoBehaviour:
   healthRegenPerSecond: 1
   staminaRegenPerSecond: 10
   attackPower: 10
-  movementSpeed: 1.75
+  movementSpeed: 2
   criticalChance: 10
   criticalDamageMultiplier: 2

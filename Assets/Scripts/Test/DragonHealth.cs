@@ -18,7 +18,8 @@ public class DragonHealth : MonoBehaviour
 
 
 
-    public static Action ZeroStrength;
+    public Action RunZeroStamina;
+    public Action FlyZeroStamina;
 
 
     [SerializeField] private float maxHealth;  
@@ -49,15 +50,12 @@ public class DragonHealth : MonoBehaviour
 
     void Update()
     {
-        staminaBar.fillAmount = stamina / maxStamina;
+        staminaBar.fillAmount = stamina / currentStats.currentmaxStamina;
         
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ToggleStaminaChange();
-        }
+        
     }
 
-    private void ToggleStaminaChange()
+    public void ToggleStaminaChange()
     {
 
         staminaTween?.Kill();
@@ -83,14 +81,15 @@ public class DragonHealth : MonoBehaviour
             .SetEase(Ease.Linear)
             .OnUpdate(() =>
             {
-                Debug.Log("Stamina Decreasing: " + stamina);
+              //  Debug.Log("Stamina Decreasing: " + stamina);
             })
             .OnComplete(() =>
             {
 
-                Debug.Log("Stamina depleted. Switching to increase.");
-                isDecreasing = false;
-                IncreaseStamina();
+              //  Debug.Log("Stamina depleted. Switching to increase.");
+               
+                RunZeroStamina.Invoke();
+               
             });
     }
     private void IncreaseStamina()
@@ -100,16 +99,16 @@ public class DragonHealth : MonoBehaviour
             .SetEase(Ease.Linear)
             .OnUpdate(() =>
             {
-                Debug.Log("Stamina Increasing: " + stamina);
+               // Debug.Log("Stamina Increasing: " + stamina);
             })
             .OnComplete(() =>
             {
-                Debug.Log("Stamina fully restored.");
+               // Debug.Log("Stamina fully restored.");
             });
     }
     private void RegenHealthPoint()
     {
-        healthTween = DOTween.To(() => health, x => health = x, currentStats.currentmaxHealth, (currentStats.currentmaxHealth - health) / healthRegenPerSecond)
+        healthTween = DOTween.To(() => health, x => health = x, currentStats.currentmaxHealth,(currentStats.currentmaxHealth - health) / healthRegenPerSecond)
             .SetEase(Ease.Linear)
             .OnUpdate(() =>
             {

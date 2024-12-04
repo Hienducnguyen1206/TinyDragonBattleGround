@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1487755865394108590}
   - component: {fileID: 3693344608105868388}
   - component: {fileID: -4351613577637340966}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tile_Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

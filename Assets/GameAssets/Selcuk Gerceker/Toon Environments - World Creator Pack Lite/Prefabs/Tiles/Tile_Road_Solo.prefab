@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8719739787567930251}
   - component: {fileID: 5669300439911011374}
   - component: {fileID: 7586755574231752932}
-  - component: {fileID: 3977551654862821926}
-  m_Layer: 0
+  - component: {fileID: -3642334221892486661}
+  m_Layer: 3
   m_Name: Tile_Road_Solo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3977551654862821926
-MeshCollider:
+--- !u!65 &-3642334221892486661
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,7 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8834847623697427935, guid: fb5b599722b688841bd8273ae8e0c667, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 2.0000007, y: 2, z: 2.0000007}
+  m_Center: {x: 0, y: 0, z: 0}
