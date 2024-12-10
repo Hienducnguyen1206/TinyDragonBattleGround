@@ -1,10 +1,13 @@
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 
     public class ScreenUI : MonoBehaviour
-    {
+    { 
+
+    public static ScreenUI instance;
     #region Private Fields
         [SerializeField]
         private DragonController dragonController;     
@@ -32,6 +35,8 @@ using UnityEngine.UI;
         private Button RunButton;
         [SerializeField]
         private Button FlyButton;
+        [SerializeField]
+        private Button FollowPlayerButton;
 
     #endregion
 
@@ -41,7 +46,15 @@ using UnityEngine.UI;
 
     #region Public Methods
 
-  
+    private void Awake()
+    {
+        instance = this;
+    }
+    public void Start()
+    {
+        FollowPlayerButton.onClick.AddListener(FollowPlayerOnMinimap);
+    }
+
     public void SetDragonController(DragonController _dragonController) {
         if (_dragonController == null)
         {
@@ -56,7 +69,20 @@ using UnityEngine.UI;
 
          RunButton.onClick.AddListener(dragonController.RunButtonPressed);
          FlyButton.onClick.AddListener(dragonController.FlyButtonPressed);
+         FireButton.onClick.AddListener(()=> { dragonController.photonView.RPC("Fire", RpcTarget.All);});
+
     }
+
+    public void FollowPlayerOnMinimap()
+    {
+       
+        if (MinimapCameraFollow.Instance.FollowPlayer != true)
+        {
+            MinimapCameraFollow.Instance.FollowPlayer = true;
+        }
+       
+    }
+
 
     void Update()
     {

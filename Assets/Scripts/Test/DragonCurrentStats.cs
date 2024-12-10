@@ -15,7 +15,9 @@ public class DragonCurrentStats : MonoBehaviour
 
     [Header("Attributes")]
     public float currentAttackPower;
-    public float currentMovementSpeed;
+    public float currentWalkSpeed;
+    public float currentRunSpeed;
+    public float currentFlySpeed;
 
 
     [Header("Abilities")]
@@ -29,7 +31,9 @@ public class DragonCurrentStats : MonoBehaviour
          currentHealthRegenPerSecond = dragonStats.healthRegenPerSecond;
          currentStaminaRegenPerSecond = dragonStats.staminaRegenPerSecond;
          currentAttackPower = dragonStats.attackPower;
-         currentMovementSpeed = dragonStats.movementSpeed;
+         currentWalkSpeed = dragonStats.walkSpeed;
+         currentRunSpeed = dragonStats.runSpeed;
+         currentFlySpeed = dragonStats.flySpeed;
          currentCriticalChance = dragonStats.criticalChance;
          currentCriticalDamageMultiplier = dragonStats.criticalDamageMultiplier;
     }

@@ -11,8 +11,10 @@ public class DragonStats: ScriptableObject
     public float staminaRegenPerSecond;
 
     [Header("Attributes")]
-    public float attackPower;
-    public float movementSpeed;
+    public int attackPower;
+    public float walkSpeed;
+    public float runSpeed;
+    public float flySpeed;
 
     [Header("Abilities")]
     public float criticalChance;

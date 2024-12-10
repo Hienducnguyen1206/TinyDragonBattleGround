@@ -5,6 +5,8 @@ using UnityEngine;
 using Unity.VisualScripting;
 using Photon.Pun;
 using JetBrains.Annotations;
+using UnityEngine.InputSystem;
+
 
 [RequireComponent(typeof(Rigidbody), typeof(DragonCurrentStats))]
 public class DragonController : MonoBehaviour
@@ -15,46 +17,52 @@ public class DragonController : MonoBehaviour
     [SerializeField] DragonCurrentStats currentStats;
     [SerializeField] bool runButtonPressed = false;
     [SerializeField] bool flyButtonPressed = false;
+    [SerializeField] float rotationSpeed = 3f;
     [SerializeField] DragonHealth dragonHealth;
-    [SerializeField] PhotonView photonView;
+  
     [SerializeField] GameObject firePoint;
-    [SerializeField] ParticleSystem fireBall; 
+    [SerializeField] ParticleSystem fireBall;
+
+    public PhotonView photonView;
+
+    [SerializeField] IMagicStrategy magicStrategy;
+
 
     private enum DragonState { IDLE, WALK, RUN, FLY }
     private DragonState currentState = DragonState.IDLE;
 
-
+    private void Awake()
+    {      
+    }
     void Start()
-    {
+    {   
         dragonHealth = GetComponent<DragonHealth>();
-        _fixedJoystick.SnapX = true;
-        _fixedJoystick.SnapY = true;
+        magicStrategy = new EarthBallMegaStrategy();
+       
     }
     private void OnEnable()
     {
-        dragonHealth.RunZeroStamina += ZeroStaminaReset;
+       
+        DragonHealth.ZeroStaminaAction += ZeroStaminaReset;
     }
        
 
     private void OnDisable()
-    {
-        dragonHealth.RunZeroStamina -= ZeroStaminaReset;
+    {   
+        DragonHealth.ZeroStaminaAction -= ZeroStaminaReset;
         
     }
+
+ 
 
     public void Update()
     {
         if (photonView.IsMine)
         {
-            
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("Firee");
-                Fire();
+                SetMagicStrategy(new FireBallTinyStrategy());
             }
-
-
         }
     }
     // Update is called once per frame
@@ -64,10 +72,6 @@ public class DragonController : MonoBehaviour
         {
              DragonControll();
              HandleState();
-
-          
-           
-
         }
 
     }
@@ -75,45 +79,45 @@ public class DragonController : MonoBehaviour
     public void SetJoystick(FixedJoystick joystick)
     {
         _fixedJoystick = joystick;
+        _fixedJoystick.SnapX = true;
+        _fixedJoystick.SnapY = true;
     }
 
 
 
     void DragonControll()
     {
+        if (flyButtonPressed  ) { 
+            currentState = DragonState.FLY;
+            return;
+        }
+       
+            if ((_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0))
+            {
+                if (runButtonPressed)
+                {
+                    currentState = DragonState.RUN;
+                }
 
-        if ((_fixedJoystick.Horizontal != 0 || _fixedJoystick.Vertical != 0) )
-        {
-            if (runButtonPressed)
-            {
-                currentState = DragonState.RUN;
-            }
-            else if (flyButtonPressed)
-            {
-                currentState = DragonState.FLY;
+                else
+                {
+                    currentState = DragonState.WALK;
+                }
 
             }
             else
             {
-                currentState = DragonState.WALK;
+                if (!flyButtonPressed)
+                {
+                    currentState = DragonState.IDLE;
+                }
             }
-
-        }
-        else 
-        {
-            if (!flyButtonPressed)
-            {
-                currentState = DragonState.IDLE;
-            }
-           
-        }
+        
                
     }
 
-
     private void HandleState()
     {
-
         switch (currentState)
         {
             case DragonState.IDLE:
@@ -159,7 +163,6 @@ public class DragonController : MonoBehaviour
         {
             dragonHealth.ToggleStaminaChange();
         }
-        runButtonPressed = false;
         flyButtonPressed = !flyButtonPressed;
         _rigidbody.useGravity = !_rigidbody.useGravity;
        
@@ -177,67 +180,69 @@ public class DragonController : MonoBehaviour
 
     public void Walk()
     {
-        Vector3 velocity = new Vector3(_fixedJoystick.Horizontal * currentStats.currentMovementSpeed, _rigidbody.velocity.y, _fixedJoystick.Vertical * currentStats.currentMovementSpeed);
-        Quaternion rotation = Quaternion.Euler(0, 45, 0);
-        Vector3 rotatedVelocity = rotation * velocity;
-        _rigidbody.velocity = rotatedVelocity;
-        if (_rigidbody.velocity != Vector3.zero)
-        {
-
-            Vector3 direction = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
-        }
+        Move(currentStats.currentWalkSpeed);
     }
 
     public void Run()
     {
-        Vector3 velocity = new Vector3(_fixedJoystick.Horizontal * currentStats.currentMovementSpeed * 3f, _rigidbody.velocity.y, _fixedJoystick.Vertical * currentStats.currentMovementSpeed * 3f);
-        Quaternion rotation = Quaternion.Euler(0, 45, 0);
-        Vector3 rotatedVelocity = rotation * velocity;
-        _rigidbody.velocity = rotatedVelocity;
-        if (_rigidbody.velocity != Vector3.zero)
-        {
-
-            Vector3 direction = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
-        }
+        Move(currentStats.currentRunSpeed);
     }
 
     public void Fly()
     {
-    
-            if (transform.position.y < 5f)
-            {
-                _rigidbody.AddForce(Vector3.up * 5f, ForceMode.Force);
-
-            }
-            else
-            {
-
-                
-                _rigidbody.velocity = Vector3.zero;
-            }
-               
-
-        Vector3 velocity = new Vector3(_fixedJoystick.Horizontal * currentStats.currentMovementSpeed * 4f, _rigidbody.velocity.y, _fixedJoystick.Vertical * currentStats.currentMovementSpeed * 4f);
-        Quaternion rotation = Quaternion.Euler(0, 45, 0);
-        Vector3 rotatedVelocity = rotation * velocity;
-        _rigidbody.velocity = rotatedVelocity;
-        if (_rigidbody.velocity != Vector3.zero)
+        if (transform.position.y < 5f)
         {
-            Vector3 direction = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6f);
+            _rigidbody.AddForce(Vector3.up * 5f, ForceMode.Force);
         }
+        else
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
+
+
+        Move(currentStats.currentFlySpeed);
     }
 
-    public void Fire()
+
+    private void Move(float speed)
     {
-        ParticleSystem fireball = GameObject.Instantiate(fireBall, firePoint.transform.position, firePoint.transform.rotation);
-        Rigidbody _rb = fireball.GetComponent<Rigidbody>();
-        _rb.AddForce(firePoint.transform.forward *5f,ForceMode.Impulse);
-        _animator.SetTrigger("Fire");
+        Vector3 velocity = new Vector3(_fixedJoystick.Horizontal, 0, _fixedJoystick.Vertical) * speed;
+        velocity.y = _rigidbody.velocity.y;  
+
+       
+        Quaternion rotation = Quaternion.Euler(0, 45, 0); 
+        Vector3 rotatedVelocity = rotation * velocity;
+        _rigidbody.velocity = rotatedVelocity;
+
+       
+        if (_rigidbody.velocity.x != 0 || _rigidbody.velocity.z != 0)
+        {
+            Vector3 direction = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z); 
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+
+    }
+
+
+    public void SetMagicStrategy(IMagicStrategy newMagicStrategy) { 
+        this.magicStrategy = newMagicStrategy;
+    }
+
+    [PunRPC]
+    public void Fire()
+    { 
+        
+        if (photonView.IsMine)
+        {
+            _animator.SetTrigger("Fire");
+            magicStrategy.Firing(firePoint.transform, 20, 5f);
+        }
+        
+    }
+
+    public void FireBreathe()
+    {
+
     }
 }

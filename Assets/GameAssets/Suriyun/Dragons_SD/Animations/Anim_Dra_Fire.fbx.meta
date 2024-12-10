@@ -1,85 +1,233 @@
 fileFormatVersion: 2
 guid: ce8b91eea3deacc4291aee26457a92c4
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: ArmL1
-    100004: ArmL2
-    100006: ArmL3
-    100008: ArmR1
-    100010: ArmR2
-    100012: ArmR3
-    100014: Center
-    100016: Head
-    100018: Head_End
-    100020: LegL1
-    100022: LegL2
-    100024: LegL3
-    100026: LegR1
-    100028: LegR2
-    100030: LegR3
-    100032: Mouth_Top1
-    100034: Mouth_Top2
-    100036: Mouth_Under1
-    100038: Mouth_Under2
-    100040: Root
-    100042: Spine1
-    100044: Spine2
-    100046: Tail1
-    100048: Tail2
-    100050: Tail3
-    100052: Tail4
-    100054: Tail5
-    100056: WingL1
-    100058: WingL2
-    100060: WingL3
-    100062: WingL4
-    100064: WingR1
-    100066: WingR2
-    100068: WingR3
-    100070: WingR4
-    400000: //RootNode
-    400002: ArmL1
-    400004: ArmL2
-    400006: ArmL3
-    400008: ArmR1
-    400010: ArmR2
-    400012: ArmR3
-    400014: Center
-    400016: Head
-    400018: Head_End
-    400020: LegL1
-    400022: LegL2
-    400024: LegL3
-    400026: LegR1
-    400028: LegR2
-    400030: LegR3
-    400032: Mouth_Top1
-    400034: Mouth_Top2
-    400036: Mouth_Under1
-    400038: Mouth_Under2
-    400040: Root
-    400042: Spine1
-    400044: Spine2
-    400046: Tail1
-    400048: Tail2
-    400050: Tail3
-    400052: Tail4
-    400054: Tail5
-    400056: WingL1
-    400058: WingL2
-    400060: WingL3
-    400062: WingL4
-    400064: WingR1
-    400066: WingR2
-    400068: WingR3
-    400070: WingR4
-    7400000: Anim_Dra_Fire
-    9500000: //RootNode
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: ArmL1
+  - first:
+      1: 100004
+    second: ArmL2
+  - first:
+      1: 100006
+    second: ArmL3
+  - first:
+      1: 100008
+    second: ArmR1
+  - first:
+      1: 100010
+    second: ArmR2
+  - first:
+      1: 100012
+    second: ArmR3
+  - first:
+      1: 100014
+    second: Center
+  - first:
+      1: 100016
+    second: Head
+  - first:
+      1: 100018
+    second: Head_End
+  - first:
+      1: 100020
+    second: LegL1
+  - first:
+      1: 100022
+    second: LegL2
+  - first:
+      1: 100024
+    second: LegL3
+  - first:
+      1: 100026
+    second: LegR1
+  - first:
+      1: 100028
+    second: LegR2
+  - first:
+      1: 100030
+    second: LegR3
+  - first:
+      1: 100032
+    second: Mouth_Top1
+  - first:
+      1: 100034
+    second: Mouth_Top2
+  - first:
+      1: 100036
+    second: Mouth_Under1
+  - first:
+      1: 100038
+    second: Mouth_Under2
+  - first:
+      1: 100040
+    second: Root
+  - first:
+      1: 100042
+    second: Spine1
+  - first:
+      1: 100044
+    second: Spine2
+  - first:
+      1: 100046
+    second: Tail1
+  - first:
+      1: 100048
+    second: Tail2
+  - first:
+      1: 100050
+    second: Tail3
+  - first:
+      1: 100052
+    second: Tail4
+  - first:
+      1: 100054
+    second: Tail5
+  - first:
+      1: 100056
+    second: WingL1
+  - first:
+      1: 100058
+    second: WingL2
+  - first:
+      1: 100060
+    second: WingL3
+  - first:
+      1: 100062
+    second: WingL4
+  - first:
+      1: 100064
+    second: WingR1
+  - first:
+      1: 100066
+    second: WingR2
+  - first:
+      1: 100068
+    second: WingR3
+  - first:
+      1: 100070
+    second: WingR4
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: ArmL1
+  - first:
+      4: 400004
+    second: ArmL2
+  - first:
+      4: 400006
+    second: ArmL3
+  - first:
+      4: 400008
+    second: ArmR1
+  - first:
+      4: 400010
+    second: ArmR2
+  - first:
+      4: 400012
+    second: ArmR3
+  - first:
+      4: 400014
+    second: Center
+  - first:
+      4: 400016
+    second: Head
+  - first:
+      4: 400018
+    second: Head_End
+  - first:
+      4: 400020
+    second: LegL1
+  - first:
+      4: 400022
+    second: LegL2
+  - first:
+      4: 400024
+    second: LegL3
+  - first:
+      4: 400026
+    second: LegR1
+  - first:
+      4: 400028
+    second: LegR2
+  - first:
+      4: 400030
+    second: LegR3
+  - first:
+      4: 400032
+    second: Mouth_Top1
+  - first:
+      4: 400034
+    second: Mouth_Top2
+  - first:
+      4: 400036
+    second: Mouth_Under1
+  - first:
+      4: 400038
+    second: Mouth_Under2
+  - first:
+      4: 400040
+    second: Root
+  - first:
+      4: 400042
+    second: Spine1
+  - first:
+      4: 400044
+    second: Spine2
+  - first:
+      4: 400046
+    second: Tail1
+  - first:
+      4: 400048
+    second: Tail2
+  - first:
+      4: 400050
+    second: Tail3
+  - first:
+      4: 400052
+    second: Tail4
+  - first:
+      4: 400054
+    second: Tail5
+  - first:
+      4: 400056
+    second: WingL1
+  - first:
+      4: 400058
+    second: WingL2
+  - first:
+      4: 400060
+    second: WingL3
+  - first:
+      4: 400062
+    second: WingL4
+  - first:
+      4: 400064
+    second: WingR1
+  - first:
+      4: 400066
+    second: WingR2
+  - first:
+      4: 400068
+    second: WingR3
+  - first:
+      4: 400070
+    second: WingR4
+  - first:
+      74: 7400000
+    second: Anim_Dra_Fire
+  - first:
+      95: 9500000
+    second: //RootNode
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -88,6 +236,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -97,7 +246,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -108,6 +257,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Anim_Dra_Fire
       takeName: Anim_Dra_Fire
+      internalID: 0
       firstFrame: 651
       lastFrame: 665
       wrapMode: 0
@@ -140,25 +290,36 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -167,12 +328,192 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Anim_Dra_Fire(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root
+      parentName: Anim_Dra_Fire(Clone)
+      position: {x: 0, y: 0.06158583, z: 0.42386356}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Center
+      parentName: Root
+      position: {x: -0, y: 0.43275997, z: -0.3269257}
+      rotation: {x: 0.026507165, y: 0.7066098, z: 0.026507165, w: 0.7066098}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LegL1
+      parentName: Center
+      position: {x: 0.089239605, y: -0.106099546, z: -0.35829058}
+      rotation: {x: 0.76421034, y: 0.6447785, z: 0.014409528, w: -0.005976379}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LegL2
+      parentName: LegL1
+      position: {x: -0.21314615, y: -0.02962965, z: -2.8291443e-16}
+      rotation: {x: 0.0015458972, y: 0.0033416143, z: -0.20657846, w: 0.9784231}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LegL3
+      parentName: LegL2
+      position: {x: -0.15706442, y: 0.02401557, z: 1.8295072e-18}
+      rotation: {x: 0.42841557, y: 0.5664341, z: -0.40481925, w: 0.5759635}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LegR1
+      parentName: Center
+      position: {x: 0.08923958, y: -0.10609918, z: 0.358291}
+      rotation: {x: -0.6700254, y: 0.742167, z: -0.005505708, w: -0.014961243}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LegR2
+      parentName: LegR1
+      position: {x: 0.20914234, y: 0.043358404, z: -3.8509487e-16}
+      rotation: {x: 0.00079307146, y: 0.0020634166, z: -0.17517066, w: 0.9845356}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LegR3
+      parentName: LegR2
+      position: {x: 0.15706438, y: -0.024015523, z: 1.5837592e-16}
+      rotation: {x: 0.40373996, y: 0.5840182, z: -0.3806795, w: 0.5924526}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail1
+      parentName: Center
+      position: {x: 0.172368, y: 0.07666177, z: -1.27533185e-17}
+      rotation: {x: 0.28849813, y: 0.9574262, z: -0.002117966, w: 0.0099761505}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail2
+      parentName: Tail1
+      position: {x: -0.21030399, y: 2.2204459e-17, z: -5.9164567e-33}
+      rotation: {x: -0.001052194, y: -0.010144024, z: -0.019878924, w: 0.9997504}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail3
+      parentName: Tail2
+      position: {x: -0.21886699, y: 1.9539925e-16, z: -7.613142e-34}
+      rotation: {x: -0.0011265507, y: -0.0073886695, z: -0.06777623, w: 0.99767256}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail4
+      parentName: Tail3
+      position: {x: -0.19513983, y: 7.2164494e-17, z: -1.22490875e-32}
+      rotation: {x: -0.00078371237, y: -0.007432856, z: -0.021573875, w: 0.99973935}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tail5
+      parentName: Tail4
+      position: {x: -0.17260838, y: 1.3100631e-16, z: 2.805315e-33}
+      rotation: {x: 0.032022804, y: 0.7063813, z: -0.032022804, w: 0.7063813}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine1
+      parentName: Center
+      position: {x: -0.19067131, y: 0.0014144481, z: 2.1286545e-17}
+      rotation: {x: -0.026507145, y: -0.7066098, z: -0.026507145, w: 0.7066098}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine2
+      parentName: Spine1
+      position: {x: 1.5017717e-17, y: 0.19675392, z: -0.02347023}
+      rotation: {x: -0.36990124, y: 0.6026385, z: -0.36990124, w: 0.6026385}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Spine2
+      position: {x: -0.28997454, y: 0.2673531, z: -5.517563e-17}
+      rotation: {x: 0, y: -0, z: -0.0013059225, w: 0.99999917}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head_End
+      parentName: Head
+      position: {x: -0.41603908, y: -0.36259058, z: 2.6047028e-16}
+      rotation: {x: 0.3706879, y: -0.60215485, z: 0.3706879, w: 0.60215485}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mouth_Top1
+      parentName: Head
+      position: {x: 0.09882605, y: -0.17008464, z: 3.8780378e-17}
+      rotation: {x: 5.551114e-17, y: 1.2490009e-16, z: 0.7229394, w: 0.6909115}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mouth_Top2
+      parentName: Mouth_Top1
+      position: {x: -0.8320096, y: -0.0025151463, z: 1.3692188e-16}
+      rotation: {x: -0.1792089, y: -0.6840206, z: -0.1792089, w: 0.6840206}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mouth_Under1
+      parentName: Head
+      position: {x: 0.1930844, y: -0.21390605, z: 6.452687e-17}
+      rotation: {x: -1.9428903e-16, y: -4.1633363e-17, z: 0.771919, w: 0.6357209}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Mouth_Under2
+      parentName: Mouth_Under1
+      position: {x: -0.7212966, y: -0.013644776, z: 5.123803e-17}
+      rotation: {x: -0.22916073, y: -0.66894346, z: -0.22916073, w: 0.66894346}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ArmL1
+      parentName: Spine1
+      position: {x: -0.37860605, y: -0.086240664, z: 0.20962614}
+      rotation: {x: 0.6013367, y: 0.37201363, z: -0.6013367, w: -0.37201363}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ArmL2
+      parentName: ArmL1
+      position: {x: -0.21603982, y: -0.019708458, z: -1.4003146e-16}
+      rotation: {x: 8.5527765e-16, y: 1.3602382e-15, z: -0.31741512, w: 0.9482867}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ArmL3
+      parentName: ArmL2
+      position: {x: -0.15875992, y: 0.03828595, z: -1.0771778e-18}
+      rotation: {x: 0.46957904, y: 0.52867335, z: -0.46957904, w: 0.52867335}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ArmR1
+      parentName: Spine1
+      position: {x: 0.378606, y: -0.08624031, z: 0.20962578}
+      rotation: {x: 0.355759, y: -0.6070834, z: -0.38937622, w: 0.59436655}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ArmR2
+      parentName: ArmR1
+      position: {x: 0.21604002, y: 0.019709216, z: -2.1062988e-16}
+      rotation: {x: -2.093907e-15, y: -4.0005624e-15, z: -0.315286, w: 0.9489967}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ArmR3
+      parentName: ArmR2
+      position: {x: 0.15875986, y: -0.038285904, z: 1.3729597e-16}
+      rotation: {x: 0.46957904, y: 0.52867335, z: -0.46957904, w: 0.52867335}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WingR1
+      parentName: Spine1
+      position: {x: 0.49643198, y: 0.6381887, z: 0.06714398}
+      rotation: {x: 0.888506, y: -0.07438278, z: -0.12325264, w: -0.4356985}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WingR2
+      parentName: WingR1
+      position: {x: 0.29848617, y: 0.0018999999, z: -0.00000013575854}
+      rotation: {x: -0.18873, y: 0.09742472, z: -0.114561625, w: 0.9704458}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WingR3
+      parentName: WingR2
+      position: {x: 0.35195434, y: 0.0075999997, z: -0.00000003793737}
+      rotation: {x: -0.06410395, y: 0.17598657, z: 0.008409508, w: -0.9822672}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WingR4
+      parentName: WingR3
+      position: {x: 0.48165953, y: 0.007900833, z: -0.17962669}
+      rotation: {x: 0.000000011920589, y: 0.500542, z: -0.000000006892307, w: 0.8657123}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WingL1
+      parentName: Spine1
+      position: {x: -0.49643221, y: 0.6381872, z: 0.067144014}
+      rotation: {x: 0.43569842, y: -0.12325212, z: 0.07438224, w: 0.88850605}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WingL2
+      parentName: WingL1
+      position: {x: -0.29848593, y: -0.0019004415, z: -2.8598605e-17}
+      rotation: {x: -0.1887254, y: 0.09742333, z: -0.11456391, w: 0.97044665}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WingL3
+      parentName: WingL2
+      position: {x: -0.35195407, y: -0.007601766, z: -8.1336405e-17}
+      rotation: {x: -0.06409858, y: 0.17598782, z: 0.008406043, w: -0.9822673}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WingL4
+      parentName: WingL3
+      position: {x: -0.4816611, y: -0.007900829, z: 0.17962888}
+      rotation: {x: 0, y: 0.500542, z: -0, w: 0.8657123}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -180,13 +521,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

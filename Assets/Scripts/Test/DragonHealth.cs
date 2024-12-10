@@ -5,21 +5,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DragonHealth : MonoBehaviour
+public class DragonHealth : MonoBehaviour,IHurt
 {
 
     [SerializeField] DragonCurrentStats currentStats;
     [SerializeField] Image healthBar;
     [SerializeField] Image staminaBar;
 
-  
 
-
-
-
-
-    public Action RunZeroStamina;
-    public Action FlyZeroStamina;
+    public static Action ZeroStaminaAction;
+   
 
 
     [SerializeField] private float maxHealth;  
@@ -38,8 +33,7 @@ public class DragonHealth : MonoBehaviour
     private Tween healthTween;
 
     void Start()
-    {   
-       
+    {          
         health = currentStats.currentmaxHealth;
         stamina = currentStats.currentmaxStamina;
         decreaseRate = 10f;
@@ -50,9 +44,7 @@ public class DragonHealth : MonoBehaviour
 
     void Update()
     {
-        staminaBar.fillAmount = stamina / currentStats.currentmaxStamina;
-        
-        
+        staminaBar.fillAmount = stamina / currentStats.currentmaxStamina;     
     }
 
     public void ToggleStaminaChange()
@@ -73,51 +65,41 @@ public class DragonHealth : MonoBehaviour
             DecreaseStamina();
         }
     }
-
     private void DecreaseStamina()
     {
 
         staminaTween = DOTween.To(() => stamina, x => stamina = x, 0, stamina / decreaseRate)
             .SetEase(Ease.Linear)
-            .OnUpdate(() =>
-            {
-              //  Debug.Log("Stamina Decreasing: " + stamina);
-            })
             .OnComplete(() =>
-            {
-
-              //  Debug.Log("Stamina depleted. Switching to increase.");
-               
-                RunZeroStamina.Invoke();
+            {            
+                ZeroStaminaAction.Invoke();
                
             });
     }
     private void IncreaseStamina()
     {
-
         staminaTween = DOTween.To(() => stamina, x => stamina = x, currentStats.currentmaxStamina, (currentStats.currentmaxStamina - stamina) / increaseRate)
-            .SetEase(Ease.Linear)
-            .OnUpdate(() =>
-            {
-               // Debug.Log("Stamina Increasing: " + stamina);
-            })
-            .OnComplete(() =>
-            {
-               // Debug.Log("Stamina fully restored.");
-            });
+            .SetEase(Ease.Linear);
     }
     private void RegenHealthPoint()
     {
-        healthTween = DOTween.To(() => health, x => health = x, currentStats.currentmaxHealth,(currentStats.currentmaxHealth - health) / healthRegenPerSecond)
-            .SetEase(Ease.Linear)
-            .OnUpdate(() =>
-            {
-                Debug.Log($"Health point: {health:0.00}");
-            }).OnComplete(() =>
-            {
-                Debug.Log("Health is full");
-            });
-            
+        healthTween = DOTween.To(() => health, x => health = x, currentStats.currentmaxHealth, (currentStats.currentmaxHealth - health) / healthRegenPerSecond)
+            .SetEase(Ease.Linear);           
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (damage < 0) return;
+
+        if (health - damage <= 0)
+        {
+            health = 0;
+            Debug.Log("PlayerDeath");
+        }
+        else
+        {
+            health -= damage;
+        }
     }
 
 }
