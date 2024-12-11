@@ -1,55 +1,58 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Events;
+﻿
 using UnityEngine;
-using Unity.VisualScripting;
 using Photon.Pun;
-using JetBrains.Annotations;
-using UnityEngine.InputSystem;
+
 
 
 [RequireComponent(typeof(Rigidbody), typeof(DragonCurrentStats))]
 public class DragonController : MonoBehaviour
 {
-    [SerializeField] Animator _animator;
-    [SerializeField] Rigidbody _rigidbody;
+    private Animator _animator;
+    private Rigidbody _rigidbody;
+    private DragonHealthController _dragonHealth;
+    private DragonCurrentStats _currentStats;
+
+
+    private bool runButtonPressed = false;
+    private bool flyButtonPressed = false;
+    private float rotationSpeed = 3f;
+
     [SerializeField] FixedJoystick _fixedJoystick;
-    [SerializeField] DragonCurrentStats currentStats;
-    [SerializeField] bool runButtonPressed = false;
-    [SerializeField] bool flyButtonPressed = false;
-    [SerializeField] float rotationSpeed = 3f;
-    [SerializeField] DragonHealth dragonHealth;
-  
+
     [SerializeField] GameObject firePoint;
-    [SerializeField] ParticleSystem fireBall;
+
 
     public PhotonView photonView;
 
-    [SerializeField] IMagicStrategy magicStrategy;
+    private IMagicStrategy magicStrategy;
 
 
     private enum DragonState { IDLE, WALK, RUN, FLY }
     private DragonState currentState = DragonState.IDLE;
 
     private void Awake()
-    {      
+    {
+        _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _dragonHealth = GetComponent<DragonHealthController>();
+        _currentStats = GetComponent<DragonCurrentStats>();
     }
     void Start()
     {   
-        dragonHealth = GetComponent<DragonHealth>();
+      
+
         magicStrategy = new EarthBallMegaStrategy();
-       
+
     }
     private void OnEnable()
-    {
-       
-        DragonHealth.ZeroStaminaAction += ZeroStaminaReset;
+    {    
+        DragonHealthController.ZeroStaminaAction += ZeroStaminaReset;
     }
        
 
     private void OnDisable()
     {   
-        DragonHealth.ZeroStaminaAction -= ZeroStaminaReset;
+        DragonHealthController.ZeroStaminaAction -= ZeroStaminaReset;
         
     }
 
@@ -65,7 +68,7 @@ public class DragonController : MonoBehaviour
             }
         }
     }
-    // Update is called once per frame
+   
     private void FixedUpdate()
     {
         if (photonView.IsMine)
@@ -149,43 +152,49 @@ public class DragonController : MonoBehaviour
 
     public void RunButtonPressed()
     {
-        if (!flyButtonPressed)
+        if (photonView.IsMine)
         {
-            dragonHealth.ToggleStaminaChange();
+            if (!flyButtonPressed)
+            {
+                _dragonHealth.ToggleStaminaChange();
+            }
+            runButtonPressed = !runButtonPressed;
         }
-        runButtonPressed = !runButtonPressed;
-       
     }
      
     public void FlyButtonPressed()
     {
-        if (!runButtonPressed)
+        if (photonView.IsMine)
         {
-            dragonHealth.ToggleStaminaChange();
+            if (!runButtonPressed)
+            {
+                _dragonHealth.ToggleStaminaChange();
+            }
+            flyButtonPressed = !flyButtonPressed;
+            _rigidbody.useGravity = !_rigidbody.useGravity;
+
         }
-        flyButtonPressed = !flyButtonPressed;
-        _rigidbody.useGravity = !_rigidbody.useGravity;
-       
-      
     }
 
 
     public void ZeroStaminaReset()
-    {
-        flyButtonPressed = false;
-        runButtonPressed = false;
-        _rigidbody.useGravity = true;
-        dragonHealth.ToggleStaminaChange();
+    {   if (photonView.IsMine)
+        {
+            flyButtonPressed = false;
+            runButtonPressed = false;
+            _rigidbody.useGravity = true;
+            _dragonHealth.ToggleStaminaChange();
+        }
     }
 
     public void Walk()
     {
-        Move(currentStats.currentWalkSpeed);
+        Move(_currentStats.currentWalkSpeed);
     }
 
     public void Run()
     {
-        Move(currentStats.currentRunSpeed);
+        Move(_currentStats.currentRunSpeed);
     }
 
     public void Fly()
@@ -200,7 +209,7 @@ public class DragonController : MonoBehaviour
         }
 
 
-        Move(currentStats.currentFlySpeed);
+        Move(_currentStats.currentFlySpeed);
     }
 
 
@@ -225,8 +234,11 @@ public class DragonController : MonoBehaviour
     }
 
 
-    public void SetMagicStrategy(IMagicStrategy newMagicStrategy) { 
-        this.magicStrategy = newMagicStrategy;
+    public void SetMagicStrategy(IMagicStrategy newMagicStrategy) {
+        if (photonView.IsMine)
+        {
+            this.magicStrategy = newMagicStrategy;
+        }
     }
 
     [PunRPC]

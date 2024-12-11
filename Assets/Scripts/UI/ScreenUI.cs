@@ -7,27 +7,20 @@ using UnityEngine.UI;
     public class ScreenUI : MonoBehaviour
     { 
 
-    public static ScreenUI instance;
+ 
     #region Private Fields
         [SerializeField]
         private DragonController dragonController;     
         [SerializeField]
-        private DragonHealth dragonHealth;
+        private DragonHealthController dragonHealth;
         [SerializeField]
-        private Text playerNameText;
+        private TextMeshProUGUI playerNameText;
         [SerializeField]
-        private Slider playerHealthSlider;
+        private TextMeshProUGUI SaveZoneMinimapTimeText;
         [SerializeField]
-        private TextMeshProUGUI playerHealthText;
+        private TextMeshProUGUI SaveZoneZoommapTimeText;
         [SerializeField]
-        private Slider playerStrengSlider;
-        [SerializeField]
-        private Slider playerExpSlider;
-        [SerializeField] 
-        private TextMeshProUGUI playerExpText;
-        [SerializeField] 
-        private TextMeshProUGUI playerLevelText;
-        [SerializeField]
+  
         private FixedJoystick fixedJoystick;
         [SerializeField]
         private Button FireButton;
@@ -46,12 +39,9 @@ using UnityEngine.UI;
 
     #region Public Methods
 
-    private void Awake()
-    {
-        instance = this;
-    }
+  
     public void Start()
-    {
+    {   
         FollowPlayerButton.onClick.AddListener(FollowPlayerOnMinimap);
     }
 
@@ -61,8 +51,15 @@ using UnityEngine.UI;
             Debug.LogError("Missing dragonController target for PlayerUI.SetDragonController.", this);
             return;
         }
+
+       
+      
         
         dragonController = _dragonController;
+        if (!dragonController.photonView.IsMine)
+        {
+            gameObject.SetActive(false);
+        }
 
         dragonController.SetJoystick(fixedJoystick);
        
@@ -86,7 +83,8 @@ using UnityEngine.UI;
 
     void Update()
     {
-        
+        SaveZoneMinimapTimeText.text = SafeZoneSystem.Instance.timeFormatted;
+        SaveZoneZoommapTimeText.text = SafeZoneSystem.Instance.timeFormatted;
         
          
        

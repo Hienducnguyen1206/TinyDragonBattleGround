@@ -43,6 +43,9 @@ MonoBehaviour:
   - StartSafeZoneSystem
   - DrawCircle
   - MoveToNewPosition
+  - SetTimeText
+  - SetZoomMapText
+  - UpdateCountdownText
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

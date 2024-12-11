@@ -19,14 +19,22 @@ public class SafeZoneSystem : MonoBehaviourPunCallbacks
     public static SafeZoneSystem Instance;
     [SerializeField] List<SaveZone> SaveZoneList = new List<SaveZone>();
     [SerializeField] CircleDrawer circleDrawer;
-    [SerializeField] private TextMeshProUGUI countdownText;
+ 
 
-    private double startTime; // Thời gian bắt đầu hệ thống SafeZone
-    private double elapsedTime; // Thời gian đã trôi qua dựa trên PhotonNetwork.Time
+    private double startTime;
+    private double elapsedTime;
+    public string timeFormatted ;
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); 
+        }
     }
 
     void Start()
@@ -38,10 +46,7 @@ public class SafeZoneSystem : MonoBehaviourPunCallbacks
         }
     }
 
-    public void SetTimeText(TextMeshProUGUI text)
-    {
-        countdownText = text;
-    }
+  
 
     [PunRPC]
     private void StartSafeZoneSystem(double masterStartTime)
@@ -129,15 +134,20 @@ public class SafeZoneSystem : MonoBehaviourPunCallbacks
                 {
                     int minutes = remainingSeconds / 60;
                     int secs = remainingSeconds % 60;
-                    string timeFormatted = $"{minutes}:{secs:D2}";
-                    if (countdownText != null)
-                    {
-                        countdownText.text = timeFormatted;
-                    }
+                     timeFormatted = $"{minutes}:{secs:D2}";
+                    photonView.RPC("UpdateCountdownText", RpcTarget.All, timeFormatted);
                 }
             },
             0f,
             seconds
         ).SetEase(Ease.Linear);
+    }
+
+
+    [PunRPC]
+    private void UpdateCountdownText(string time)
+    {
+        timeFormatted = time;
+       
     }
 }

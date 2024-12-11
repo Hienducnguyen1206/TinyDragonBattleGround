@@ -5,9 +5,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DragonHealth : MonoBehaviour,IHurt
+[RequireComponent( typeof(DragonCurrentStats))]
+public class DragonHealthController : MonoBehaviour,IHurt
 {
-
+    public PhotonView photonView;
     [SerializeField] DragonCurrentStats currentStats;
     [SerializeField] Image healthBar;
     [SerializeField] Image staminaBar;
@@ -33,7 +34,8 @@ public class DragonHealth : MonoBehaviour,IHurt
     private Tween healthTween;
 
     void Start()
-    {          
+    {   
+        photonView = gameObject.GetComponent<PhotonView>();
         health = currentStats.currentmaxHealth;
         stamina = currentStats.currentmaxStamina;
         decreaseRate = 10f;
@@ -44,7 +46,11 @@ public class DragonHealth : MonoBehaviour,IHurt
 
     void Update()
     {
-        staminaBar.fillAmount = stamina / currentStats.currentmaxStamina;     
+        if (photonView.IsMine)
+        {
+            staminaBar.fillAmount = stamina / currentStats.currentmaxStamina;
+        }
+          
     }
 
     public void ToggleStaminaChange()

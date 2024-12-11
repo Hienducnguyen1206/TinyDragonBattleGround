@@ -10,7 +10,7 @@ public class Fireball : MonoBehaviour
 
         if (other != null)
         {
-            DragonHealth health = other.gameObject.GetComponent<DragonHealth>();
+            DragonHealthController health = other.gameObject.GetComponent<DragonHealthController>();
             if (health != null)
             {
                 health.TakeDamage(20);

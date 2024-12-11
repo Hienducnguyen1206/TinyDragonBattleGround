@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7357162124745689271}
   - component: {fileID: 7511950534153640949}
   - component: {fileID: 7497115821136380497}
+  - component: {fileID: 8717228663789584835}
   - component: {fileID: 4043008545912706335}
-  - component: {fileID: 4223792291035621565}
   - component: {fileID: -1115316067703295691}
   - component: {fileID: -2016648099857501965}
   - component: {fileID: -2090006567208217113}
@@ -122,6 +122,28 @@ MonoBehaviour:
   currentFlySpeed: 0
   currentCriticalChance: 0
   currentCriticalDamageMultiplier: 0
+--- !u!114 &8717228663789584835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573644209128332496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1221a08568f49a14493c9772003ba798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
+  currentStats: {fileID: 7497115821136380497}
+  healthBar: {fileID: 4212953393283778683}
+  staminaBar: {fileID: 3582306436286993251}
+  maxHealth: 0
+  maxStamina: 0
+  decreaseRate: 0
+  increaseRate: 0
+  healthRegenPerSecond: 0
+  isDecreasing: 0
 --- !u!114 &4043008545912706335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,38 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabbf5955886e3443a0735f8d965b937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 7357162124745689271}
-  _rigidbody: {fileID: 7511950534153640949}
   _fixedJoystick: {fileID: 0}
-  currentStats: {fileID: 7497115821136380497}
-  runButtonPressed: 0
-  flyButtonPressed: 0
-  rotationSpeed: 5
-  dragonHealth: {fileID: 4223792291035621565}
   firePoint: {fileID: 651915935345754439}
-  fireBall: {fileID: 7793651697238289631, guid: b43c71947cb94ea4b9ab97681da45436, type: 3}
   photonView: {fileID: -1115316067703295691}
---- !u!114 &4223792291035621565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573644209128332496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fbb279749bec7946bff103eaaafb43c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStats: {fileID: 7497115821136380497}
-  healthBar: {fileID: 4212953393283778683}
-  staminaBar: {fileID: 3582306436286993251}
-  maxHealth: 0
-  maxStamina: 0
-  decreaseRate: 5
-  increaseRate: 5
-  healthRegenPerSecond: 0
-  isDecreasing: 0
 --- !u!114 &-1115316067703295691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,14 +225,11 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: Flying
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: Fire
-  - Type: 1
-    SynchronizeType: 0
-    Name: SinAlpha
   - Type: 4
-    SynchronizeType: 0
-    Name: Higher3f
+    SynchronizeType: 2
+    Name: Death
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -256,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
+  m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
 --- !u!135 &3759331047127069020
