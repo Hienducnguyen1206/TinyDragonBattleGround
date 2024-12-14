@@ -10,15 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 4472018319690888046}
   - component: {fileID: 7357162124745689271}
+  - component: {fileID: 3759331047127069020}
   - component: {fileID: 7511950534153640949}
   - component: {fileID: 7497115821136380497}
   - component: {fileID: 8717228663789584835}
   - component: {fileID: 4043008545912706335}
   - component: {fileID: -1115316067703295691}
   - component: {fileID: -2016648099857501965}
-  - component: {fileID: -2090006567208217113}
   - component: {fileID: -6062038177841247656}
-  - component: {fileID: 3759331047127069020}
+  - component: {fileID: -2090006567208217113}
   m_Layer: 0
   m_Name: DragonSD_13
   m_TagString: Untagged
@@ -72,6 +72,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!135 &3759331047127069020
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573644209128332496}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0.73, z: 0}
 --- !u!54 &7511950534153640949
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -174,13 +195,13 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
   - {fileID: -2016648099857501965}
-  - {fileID: -2090006567208217113}
   - {fileID: -6062038177841247656}
+  - {fileID: -2090006567208217113}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -200,6 +221,22 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-6062038177841247656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573644209128332496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &-2090006567208217113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,51 +262,14 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: Flying
   - Type: 9
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: Fire
   - Type: 4
     SynchronizeType: 2
     Name: Death
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 2
     LayerIndex: 0
---- !u!114 &-6062038177841247656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573644209128332496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 1
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
---- !u!135 &3759331047127069020
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573644209128332496}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.75
-  m_Center: {x: 0, y: 0.73, z: 0}
 --- !u!1 &651915935345754439
 GameObject:
   m_ObjectHideFlags: 0

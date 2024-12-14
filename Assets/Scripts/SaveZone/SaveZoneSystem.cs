@@ -75,7 +75,7 @@ public class SafeZoneSystem : MonoBehaviourPunCallbacks
             Vector3 nextCenter = GetNextCenterPosition(currentZone.scale.x, previousCenter, currentScale.x);
 
             sequence.AppendCallback(() =>
-             circleDrawer.photonView.RPC("MoveToNewPosition", RpcTarget.All, nextCenter, currentZone.scale.x / 2)
+             circleDrawer.photonView.RPC("MoveToNewPosition", RpcTarget.AllBuffered, nextCenter, currentZone.scale.x / 2)
             );
 
             sequence.AppendCallback(() => CreateCountdown(currentZone.delay));
@@ -90,7 +90,7 @@ public class SafeZoneSystem : MonoBehaviourPunCallbacks
         }
 
         sequence.AppendCallback(() =>
-         circleDrawer.photonView.RPC("MoveToNewPosition", RpcTarget.All,previousCenter, 0.001f)
+         circleDrawer.photonView.RPC("MoveToNewPosition", RpcTarget.AllBuffered,previousCenter, 0.001f)
         );
 
         sequence.AppendCallback(() => CreateCountdown(SaveZoneList[^1].delay));

@@ -145,6 +145,7 @@ public class DragonController : MonoBehaviour
                 _animator.SetBool("Running", false);
                 _animator.SetBool("Flying",true );
                 Fly();
+                
                 break;
 
         }
@@ -172,6 +173,7 @@ public class DragonController : MonoBehaviour
             }
             flyButtonPressed = !flyButtonPressed;
             _rigidbody.useGravity = !_rigidbody.useGravity;
+            photonView.RPC("SetGravity", RpcTarget.All, _rigidbody.useGravity);
 
         }
     }
@@ -256,5 +258,11 @@ public class DragonController : MonoBehaviour
     public void FireBreathe()
     {
 
+    }
+
+    [PunRPC]
+    private void SetGravity(bool useGravity)
+    {
+        _rigidbody.useGravity = useGravity;
     }
 }
